@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import pirateStyle from './Main.module.css';
+import myStyle from './Main.module.css';
 import Button from 'react-bootstrap/Button';
 import NavBar from './NavBar';
 
 const Main = (props) => {
 
-    const [pirates, setPirates] = useState([]);
+    const [fruits, setFruits] = useState([]);
     const navigate = useNavigate();
     const handleAdd = () => {
         navigate("/admin/new");
@@ -34,29 +34,29 @@ const Main = (props) => {
         axios.get("http://localhost:8000/api/fruits")
             .then(res => {
                 console.log(res.data);
-                setPirates(res.data.sort(compareName));
+                setFruits(res.data.sort(compareName));
             })
             .catch(err => console.log(err))
     }, [])
 
-    const deletePirate = (deleteID) => {
+    const deleteFruit = (deleteID) => {
         axios.delete(`http://localhost:8000/api/fruits/${deleteID}`)
             .then(res => {
                 console.log(res.data);
                 console.log("Delete successfully");
                 // remove the note from the DOM after a successful deletion
-                setPirates(pirates.filter((pirate) => pirate._id !== deleteID));
+                setFruits(fruits.filter((fruit) => fruit._id !== deleteID));
             })
             .catch(err => console.log(err))
     }
 
-    const viewPirate = (viewID) => {
+    const viewFruit = (viewID) => {
         navigate("/fruits/" + viewID);
     }
 
     return (
         <div >
-            <div className={pirateStyle.topBox}>
+            <div className={myStyle.topBox}>
                 <NavBar />
             </div>
             <div>
@@ -65,22 +65,22 @@ const Main = (props) => {
                     Add Fruit
                 </Button>
             </div>
-            <div className={pirateStyle.bigBox}>
-                {pirates.map((onePirate) => {
+            <div className={myStyle.bigBox}>
+                {fruits.map((oneFruit) => {
                     return (
-                        <div key={onePirate._id} className={pirateStyle.boxMain}>
-                            <div ><img className={pirateStyle.pictureViewOne} src={onePirate.image} /></div>
+                        <div key={oneFruit._id} className={myStyle.boxMain}>
+                            <div ><img className={myStyle.pictureViewOne} src={oneFruit.image} /></div>
                             <div>
-                                <h3>{onePirate.name}</h3>
+                                <h3>{oneFruit.name}</h3>
                                 <Button
-                                    onClick={() => viewPirate(onePirate._id)}
+                                    onClick={() => viewFruit(oneFruit._id)}
                                     variant="info">
                                     Info
                                 </Button>
                                 <hr></hr>
                                 <Button
                                     variant="info"
-                                    onClick={() => deletePirate(onePirate._id)}>
+                                    onClick={() => deleteFruit(oneFruit._id)}>
                                     Delete
                                 </Button>
                             </div>

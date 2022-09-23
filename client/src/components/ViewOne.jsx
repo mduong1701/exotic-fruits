@@ -1,42 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import pirateStyle from './Main.module.css';
+import myStyle from './Main.module.css';
 import NavBar from './NavBar';
 
 const ViewOne = () => {
-
     const { id } = useParams();
-
-    const [thisPirate, setThisPirate] = useState(null);
-
+    const [thisFruit, setThisFruit] = useState(null);
     useEffect(() => {
         axios.get(`http://localhost:8000/api/fruits/${id}`)
             .then(res => {
                 console.log(res.data);
-                setThisPirate(res.data);
+                setThisFruit(res.data);
             })
             .catch(err => console.log(err))
     }, [])
 
     return (
         <div>
-            <div className={pirateStyle.topBox}>
+            <div className={myStyle.topBox}>
                 <NavBar />
             </div>
             {
-                thisPirate
+                thisFruit
                     ? <div>
-                        <div className={pirateStyle.flexDisplayViewOne}>
-                            <div className={pirateStyle.shiver}>
-
-                                <div ><img className={pirateStyle.pictureViewOne} src={thisPirate.image} /></div>
-
+                        <div className={myStyle.flexDisplayViewOne}>
+                            <div className={myStyle.shiver}>
+                                <div ><img className={myStyle.pictureViewOne} src={thisFruit.image} /></div>
                             </div>
-                            <div className={pirateStyle.details}>
-                                <h2 className={pirateStyle.center}>{thisPirate.name}</h2>
-                                <p><strong>Price (per lb): </strong>${thisPirate.price}</p>
-                                <p><strong>Description: </strong>{thisPirate.description}</p>
+                            <div className={myStyle.details}>
+                                <h2 className={myStyle.center}>{thisFruit.name}</h2>
+                                <p><strong>Price (per lb): </strong>${thisFruit.price}</p>
+                                <p><strong>Description: </strong>{thisFruit.description}</p>
                             </div>
                         </div>
                     </div>

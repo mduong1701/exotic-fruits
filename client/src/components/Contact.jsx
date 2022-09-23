@@ -1,14 +1,14 @@
 import React from 'react';
 import NavBar from './NavBar';
-import pirateStyle from './Main.module.css';
+import myStyle from './Main.module.css';
 
 const Contact = () => {
     return (
         <div>
-            <div className={pirateStyle.topBox}>
+            <div className={myStyle.topBox}>
                 <NavBar />
             </div>
-            <div className={pirateStyle.centerContact}>
+            <div className={myStyle.centerContact}>
                 <h3>Exotic Fruits</h3>
                 <p>12345 N Main St,</p>
                 <p>Bobdale, CA 98765</p>

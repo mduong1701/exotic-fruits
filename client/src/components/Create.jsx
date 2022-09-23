@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import pirateStyle from './Main.module.css';
+import myStyle from './Main.module.css';
 import NavBar from './NavBar';
-import Button from 'react-bootstrap/Button';
 
 const Create = () => {
-
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [image, setImage] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(null);
-
     const acceptName = (event) => {
         setName(event.target.value);
     }
-
     const acceptDescription = (event) => {
         setDescription(event.target.value);
     }
-
     const createFruit = (event) => {
         event.preventDefault();
-
         axios.post("http://localhost:8000/api/fruits", {
             name,
             price,
@@ -39,18 +33,13 @@ const Create = () => {
                 console.log(err.response.data)
             })
     }
-
-
     return (
         <div>
-            <div className={pirateStyle.topBox}>
+            <div className={myStyle.topBox}>
                 <NavBar />
             </div>
             <form onSubmit={createFruit}>
-                
-
                     <div>
-
                         <div>
                             <div>Name:</div>
                             <input
@@ -72,9 +61,6 @@ const Create = () => {
                             <input
                                 onChange={event => setPrice(event.target.value)}
                                 type="Number"
-                            // onChange={acceptName}
-                            // onChange={event => setName(event.target.value)}
-                            // value={name}
                             />
                         </div>
                         {/* ========================================================== */}
@@ -89,9 +75,7 @@ const Create = () => {
 
                     {/* ========================================================== */}
                     <div>
-                        {/* <Button variant="info"> */}
                         <button>Add Fruit</button>    
-                        {/* </Button> */}
                     </div>
             </form>
         </div>
